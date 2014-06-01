@@ -237,9 +237,9 @@ public class MainActivity extends ActionBarActivity
     
     public void delete(View view)
     {
-    	ListView list = getListViewForDelete();
+    	int index = getListViewIndexForDelete();
     	
-    	if(list == null)
+    	if(index == -1)
     	{
     		if(crusherCheck.isChecked())
     		{
@@ -249,7 +249,7 @@ public class MainActivity extends ActionBarActivity
     		return;
     	}
     	
-    	ArrayAdapter<Weight> values = (ArrayAdapter<Weight>) list.getAdapter();
+    	ArrayAdapter<Weight> values = (ArrayAdapter<Weight>) columns[index].getAdapter();
     	
     	Weight lastValue = values.getItem(values.getCount()-1);
     	
@@ -262,7 +262,7 @@ public class MainActivity extends ActionBarActivity
     		newValues.add(values.getItem(i));
     	}
     	
-    	list.setAdapter(newValues);
+    	columns[index].setAdapter(newValues);
     }
     
     private boolean verifyMode()
@@ -329,6 +329,7 @@ public class MainActivity extends ActionBarActivity
     	verifyButton.setChecked(false);
 		crusherCheck.setChecked(false);
 		totalText.setText("");
+		deleteButton.setEnabled(true);
     }
 
     private ListView getListView() 
@@ -350,7 +351,7 @@ public class MainActivity extends ActionBarActivity
 		return null;
 	}
     
-    private ListView getListViewForDelete()
+    private int getListViewIndexForDelete()
     {
     	for(int i = columns.length-1; i >= 0; i--)
     	{
@@ -363,12 +364,12 @@ public class MainActivity extends ActionBarActivity
     		int value2 = i != columns.length-1 ? columns[i+1].getAdapter().getCount() : 0;
     		if(value > 0 && value <= 10 && value2 == 0)
     		{
-    			return columns[i];
+    			return i;
     		}
     		
     	}
 
-		return null;
+		return -1;
     }
     
     private void verify(int value)
@@ -404,7 +405,7 @@ public class MainActivity extends ActionBarActivity
     
 	private ListView getVerifyListView() 
 	{
-		for(int i = 0; i < columns.length; i++)
+		for(int i = columns.length-1; i >= 0; i--)
 		{
 			if(getVerifyPosition(columns[i]) > -1)
 			{
