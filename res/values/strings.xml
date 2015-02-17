@@ -3,6 +3,7 @@
 
     <string name="app_name" tools:ignore="MissingTranslation">Structure Calculator</string>
     <string name="clear_all" tools:ignore="MissingTranslation">Clear All</string>
+    <string name="settings" tools:igmore="MissingTranslation">Settings</string>
 	<string name="exit" tools:ignore="MissingTranslation">Exit</string>
 	<string name="lbs" tools:ignore="MissingTranslation">lbs</string>
 	<string name="kgs" tools:ignore="MissingTranslation">kgs</string>
